@@ -4,30 +4,22 @@ import java.lang.String;
 public class Main {
 
     public static void main(String[] args) {
-        String sourceString = "В этом тексте несколько слов. Здесь есть пробелы в начале! Здесь есть и в начале и в конце. ";
-        char delimiter = ' ';
-        char delimiter1 = '.';
-        char delimiter2 = '!';
-        char delimiter3 = ',';
-        char delimiter4 = '!';
-        int countWorld = 0;
-        int j=0;
+        String sourceString = " В этом тексте, несколько слов. Здесь есть пробелы в начале? Здесь есть и в начале и в   конце! ";// исходный текст, в котоором нужно подсчтать колличество слов
+        String delimiters=" .,?!;:";
+        boolean isStartedWord = false;
+        int countWorlds = 0;//счетчик, подсчитывающий слова
+        // цикл , в котором перебираются все символы заданной строки (исходного текста)
         for (int i = 0; i < sourceString.length(); i++) {
-            boolean world = i != delimiter && i != delimiter1 && i != delimiter3 && i != delimiter4 && i!= delimiter2;
-            if (world) {
-                for ( j = i; j < sourceString.length(); j++) {
-                    if (world)
-                        continue;
-                    else
-                        countWorld++;
-                    i=j;
-                    break;
+            boolean isContainedDelimiter = delimiters.contains(String.valueOf(sourceString.charAt(i)));
+            if (isContainedDelimiter) {
+                isStartedWord = false;
+            } else {
+                if(!isStartedWord) {
+                    countWorlds++;
                 }
-            }
-            else {
-                continue;
+                isStartedWord = true;
             }
         }
-        System.out.print(" " + countWorld);
+        System.out.print(" " + countWorlds);
     }
 }
